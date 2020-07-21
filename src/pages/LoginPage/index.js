@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { MainWrapper, LoginWrapper, ButtonStyled } from "./style";
-import { login } from "../../actions/login"
+import { login } from "../../actions/users"
 
 const loginForm = [
   {
