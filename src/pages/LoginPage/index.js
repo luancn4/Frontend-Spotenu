@@ -23,10 +23,10 @@ class LoginPage extends Component {
   };
 
   componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token !== null) {
-      this.props.goToPosts();
-    }
+    // const token = localStorage.getItem("token");
+    // if (token !== null) {
+    //   this.props.goToPosts();
+    // }
   }
 
   handleInputLogin = (e) => {

@@ -44,7 +44,7 @@ class Signup extends Component {
       description: "",
     },
     user: "normal",
-    isAdmin: true,
+    isAdmin: false,
     isBand: false,
   };
 
