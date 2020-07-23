@@ -21,9 +21,11 @@ class ApprovationPage extends Component {
                 <p>Banda: {band.name}</p>
                 <p>Nick: {band.nickname}</p>
                 <p>Aprovada: {band.approved ? "Sim" : "Não"}</p>
-                <button onClick={() => this.approveBand(band.id)}>
-                  Aprovar
-                </button>
+                {!band.approved && (
+                  <button onClick={() => this.approveBand(band.id)}>
+                    Aprovar
+                  </button>
+                )}
               </div>
             );
           })}

@@ -75,7 +75,7 @@ export const createGenre = (genre) => async (dispatch) => {
   try {
     await axios.post(`${baseUrl}/genre/create`, body, {
       headers: {
-        authorization: token,
+        "authorization": token,
       },
     });
   } catch (err) {
