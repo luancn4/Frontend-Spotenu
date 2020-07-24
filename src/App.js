@@ -1,25 +1,26 @@
-import React from 'react';
-import Main from "./containers/Main"
-import NavBar from "./containers/NavBar"
-import Footer from "./containers/Footer"
-import styled from "styled-components"
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import Router from "./router";
+import { createBrowserHistory } from "history";
+import { createStore, applyMiddleware, compose } from "redux";
+import { generateReducers } from "./reducers";
+import { routerMiddleware } from "connected-react-router";
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 0.2fr 1fr;
-  grid-template-rows: 1fr 0.2fr;
-  min-height: 100vh;
-  min-width: 100vw;
-`
+export const history = createBrowserHistory();
 
-function App() {
-  return (
-    <Container>
-      <NavBar/>
-      <Main/>
-      <Footer/>
-    </Container>
-  );
-}
-
+const middlewares = [
+  applyMiddleware(routerMiddleware(history), thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : (f) => f,
+];
+const store = createStore(generateReducers(history), compose(...middlewares));
+export const App = () => (
+  <>
+    <Provider store={store}>
+      <Router history={history} />
+    </Provider>
+  </>
+);
 export default App;
