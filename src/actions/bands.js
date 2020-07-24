@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3000/bands";
+const baseUrl = "https://vitftlgchg.execute-api.us-east-1.amazonaws.com/dev/bands";
 
 export const setAllBands = (band) => {
   return {
@@ -102,7 +102,6 @@ export const createAlbum = (body) => async (dispatch) => {
         authorization: token,
       },
     });
-    console.log(body, token);
   } catch (err) {
     console.error(err);
   }
