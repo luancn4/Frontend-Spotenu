@@ -16,7 +16,6 @@ export const routes = {
   genres: "/genres",
   albumCreation: "/albums",
   musicCreation: "/musics"
-  
 };
 
 function Router(props) {

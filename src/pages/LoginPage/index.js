@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { MainWrapper, LoginWrapper, ButtonStyled } from "./style";
-import { login } from "../../actions/users"
+import { login } from "../../actions/users";
+import { routes } from "../../router/";
+import { push } from "connected-react-router";
 
 const loginForm = [
   {
@@ -25,7 +27,6 @@ class LoginPage extends Component {
   componentDidMount() {
     // const token = localStorage.getItem("token");
     // if (token !== null) {
-    //   this.props.goToPosts();
     // }
   }
 
@@ -68,7 +69,7 @@ class LoginPage extends Component {
             <ButtonStyled
               color="primary"
               variant="contained"
-              // onClick={() => this.props.goToSignupScreen()}
+              onClick={() => this.props.signup()}
             >
               Cadastrar
             </ButtonStyled>
@@ -80,7 +81,8 @@ class LoginPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (body) => dispatch(login(body))
+  login: (body) => dispatch(login(body)),
+  signup: () => dispatch(push(routes.signup)),
 });
 
 export default connect(null, mapDispatchToProps)(LoginPage);
