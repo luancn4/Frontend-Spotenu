@@ -36,18 +36,6 @@ export const getAllBands = () => async (dispatch) => {
 };
 
 export const getGenres = () => async (dispatch) => {
-  // dispatch(
-  //   setAllGenres([
-  //     {
-  //       id: "id001",
-  //       name: "Rock",
-  //     },
-  //     {
-  //       id: "id002",
-  //       name: "Pop",
-  //     },
-  //   ])
-  // );
   const token = localStorage.getItem("token");
   try {
     const res = await axios.get(`${baseUrl}/genres`, {
@@ -92,5 +80,20 @@ export const createGenre = (genre) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err.message);
+  }
+};
+
+export const createAlbum = (body) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    await axios.post(`${baseUrl}/album/create`, body, {
+      headers: {
+        authorization: token,
+      },
+    });
+    console.log(body, token);
+  } catch (err) {
+    console.error(err);
   }
 };
