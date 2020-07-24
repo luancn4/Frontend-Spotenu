@@ -7,13 +7,16 @@ import Signup from "../pages/SignupPage";
 import ApprovationPage from "../pages/BandApprovationPage";
 import GenresPage from "../pages/BandGenresPage";
 import AlbumCreationPage from "../pages/AlbumCreationPage";
+import MusicCreationPage from "../pages/MusicCreationPage";
 
 export const routes = {
-  login: "/",
+  login: "/login",
   signup: "/signup",
   approvation: "/approvation",
   genres: "/genres",
-  albums: "/albums",
+  albumCreation: "/albums",
+  musicCreation: "/musics"
+  
 };
 
 function Router(props) {
@@ -24,7 +27,8 @@ function Router(props) {
         <Route exact path={routes.signup} component={Signup} />
         <Route exact path={routes.approvation} component={ApprovationPage} />
         <Route exact path={routes.genres} component={GenresPage} />
-        <Route exact path={routes.albums} component={AlbumCreationPage} />
+        <Route exact path={routes.albumCreation} component={AlbumCreationPage} />
+        <Route exact path={routes.musicCreation} component={MusicCreationPage} />
       </Switch>
     </ConnectedRouter>
   );

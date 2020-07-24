@@ -20,10 +20,20 @@ export const setAllGenres = (genre) => {
   };
 };
 
+export const setBandAlbums = (album) => {
+  return {
+    type: "SET_BAND_ALBUMS",
+    payload: {
+      album,
+    },
+  };
+};
+
 export const getAllBands = () => async (dispatch) => {
   const token = localStorage.getItem("token");
+  const body = {};
   try {
-    const response = await axios.get(`${baseUrl}/all`, {
+    const response = await axios.get(`${baseUrl}/all`, body, {
       headers: {
         authorization: token,
       },
@@ -93,6 +103,35 @@ export const createAlbum = (body) => async (dispatch) => {
       },
     });
     console.log(body, token);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getAlbumsByBand = () => async (dispatch) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await axios.get(`${baseUrl}/albums`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch(setBandAlbums(res.data.albums));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createMusic = (body) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    await axios.post(`${baseUrl}/music/create`, body, {
+      headers: {
+        authorization: token,
+      },
+    });
   } catch (err) {
     console.error(err);
   }
