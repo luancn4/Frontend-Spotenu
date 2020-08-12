@@ -7,32 +7,40 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { MainWrapperLogin, LoginWrapper, ButtonStyled } from "./style";
+import styled from "styled-components"
 
+const Text = styled(TextField)`
+  width: 475px;
+`
+const SelectTest = styled(Select)`
+  width: 475px;
+
+`
 const signupForm = [
   {
     name: "name",
     type: "text",
-    label: "Nome de usuário",
+    label: "Qual o seu nome?",
     pattern: "[A-Za-zçÇ0-9 .]{5,}",
     title: "Mínimo 5 caracteres",
   },
   {
     name: "nickname",
     type: "text",
-    label: "Nickname de usuário",
+    label: "Qual o seu apelido?",
     pattern: "[A-Za-zçÇ0-9]{5,}",
     title: "Mínimo 5 caracteres",
   },
   {
     name: "email",
     type: "email",
-    label: "Email ",
+    label: "Coloque seu email ",
     title: "Digite um email válido",
   },
   {
     name: "password",
     type: "password",
-    label: "Senha ",
+    label: "Coloque sua senha ",
     pattern: "[A-Za-zçÇ0-9]{6,}",
     title: "Mínimo 6 caracteres",
   },
@@ -101,10 +109,12 @@ class Signup extends Component {
       <>
         <MainWrapperLogin>
           <LoginWrapper onSubmit={this.handleSubmit}>
+            <h1>Inscreva-se já e comece a curtir.</h1>
             {signupForm.map((input) => {
               return (
                 <div key={input.name}>
-                  <TextField
+                  <Text
+                    variant="outlined"
                     label={input.label}
                     required
                     name={input.name}
@@ -122,6 +132,7 @@ class Signup extends Component {
 
             {this.state.isBand && (
               <TextField
+                variant="outlined"
                 label={"Descrição"}
                 required
                 name={"description"}
@@ -131,13 +142,13 @@ class Signup extends Component {
               />
             )}
 
-            <Select value={this.state.user} onChange={this.handleUserOption}>
+            <SelectTest value={this.state.user} onChange={this.handleUserOption}>
               <MenuItem value={"normal"}>Normal</MenuItem>
               <MenuItem value={"band"}>Banda</MenuItem>
               {this.state.isAdmin && (
                 <MenuItem value={"admin"}>Administrador</MenuItem>
               )}
-            </Select>
+            </SelectTest>
 
             <ButtonStyled color="primary" variant="contained" type="submit">
               Cadastrar

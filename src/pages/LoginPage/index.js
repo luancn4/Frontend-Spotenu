@@ -65,7 +65,6 @@ class LoginPage extends Component {
             <Button color="secondary" variant="contained" type="submit">
               Entrar
             </Button>
-            <p>OU</p>
             <ButtonStyled
               color="primary"
               variant="contained"

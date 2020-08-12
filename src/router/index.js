@@ -8,26 +8,37 @@ import ApprovationPage from "../pages/BandApprovationPage";
 import GenresPage from "../pages/BandGenresPage";
 import AlbumCreationPage from "../pages/AlbumCreationPage";
 import MusicCreationPage from "../pages/MusicCreationPage";
+import MainPage from "../pages/MainPage";
 
 export const routes = {
+  main: "/",
   login: "/login",
   signup: "/signup",
   approvation: "/approvation",
   genres: "/genres",
   albumCreation: "/albums",
-  musicCreation: "/musics"
+  musicCreation: "/musics",
 };
 
 function Router(props) {
   return (
     <ConnectedRouter history={props.history}>
       <Switch>
+        <Route exact path={routes.main} component={MainPage} />
         <Route exact path={routes.login} component={LoginPage} />
         <Route exact path={routes.signup} component={Signup} />
         <Route exact path={routes.approvation} component={ApprovationPage} />
         <Route exact path={routes.genres} component={GenresPage} />
-        <Route exact path={routes.albumCreation} component={AlbumCreationPage} />
-        <Route exact path={routes.musicCreation} component={MusicCreationPage} />
+        <Route
+          exact
+          path={routes.albumCreation}
+          component={AlbumCreationPage}
+        />
+        <Route
+          exact
+          path={routes.musicCreation}
+          component={MusicCreationPage}
+        />
       </Switch>
     </ConnectedRouter>
   );

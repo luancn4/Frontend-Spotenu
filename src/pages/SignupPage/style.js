@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 
 export const MainWrapperLogin = styled.div`
-  height: 90vh;
+  height: 100vh;
   display: flex;
   align-items: center;
 `;
@@ -17,4 +17,5 @@ export const LoginWrapper = styled.form`
 
 export const ButtonStyled = styled(Button)`
   color: #ffffff;
+  width: 100%;
 `;

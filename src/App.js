@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import Router from "./router";
+import GlobalStyle from "./styles/global";
 import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, compose } from "redux";
 import { generateReducers } from "./reducers";
@@ -20,6 +21,7 @@ export const App = () => (
   <>
     <Provider store={store}>
       <Router history={history} />
+      <GlobalStyle/>
     </Provider>
   </>
 );
