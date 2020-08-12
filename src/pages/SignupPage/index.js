@@ -6,16 +6,15 @@ import { userSignup, bandSignup, adminSignup } from "../../actions/users";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { MainWrapperLogin, LoginWrapper, ButtonStyled } from "./style";
-import styled from "styled-components"
+import Button from "@material-ui/core/Button";
+import {
+  MainWrapperLogin,
+  LoginWrapper,
+  ButtonStyled,
+  Container,
+} from "./style";
+import styled from "styled-components";
 
-const Text = styled(TextField)`
-  width: 475px;
-`
-const SelectTest = styled(Select)`
-  width: 475px;
-
-`
 const signupForm = [
   {
     name: "name",
@@ -55,13 +54,6 @@ class Signup extends Component {
     isAdmin: false,
     isBand: false,
   };
-
-  componentDidMount() {
-    // const token = localStorage.getItem("token");
-    // if (token !== null) {
-    //   this.props.goToPosts();
-    // }
-  }
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -106,14 +98,18 @@ class Signup extends Component {
 
   render() {
     return (
-      <>
-        <MainWrapperLogin>
-          <LoginWrapper onSubmit={this.handleSubmit}>
+      <Container>
+        <div className = "background">
+          <img src = {"https://blush.ly/CISPScGbv/p"} />
+        </div>
+        <div className = "formWrapper">
+          <form onSubmit={this.handleSubmit}>
             <h1>Inscreva-se já e comece a curtir.</h1>
             {signupForm.map((input) => {
               return (
                 <div key={input.name}>
-                  <Text
+                  <TextField
+                  className= "inputs"
                     variant="outlined"
                     label={input.label}
                     required
@@ -142,20 +138,20 @@ class Signup extends Component {
               />
             )}
 
-            <SelectTest value={this.state.user} onChange={this.handleUserOption}>
+            <Select value={this.state.user} onChange={this.handleUserOption}>
               <MenuItem value={"normal"}>Normal</MenuItem>
               <MenuItem value={"band"}>Banda</MenuItem>
               {this.state.isAdmin && (
                 <MenuItem value={"admin"}>Administrador</MenuItem>
               )}
-            </SelectTest>
+            </Select>
 
-            <ButtonStyled color="primary" variant="contained" type="submit">
+            <Button className = "button" color="primary" variant="contained" type="submit">
               Cadastrar
-            </ButtonStyled>
-          </LoginWrapper>
-        </MainWrapperLogin>
-      </>
+            </Button>
+          </form>
+        </div>
+      </Container>
     );
   }
 }
