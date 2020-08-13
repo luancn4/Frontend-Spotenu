@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getGenres, createGenre } from "../../actions/bands";
+import { Container } from "./styles";
 
 class GenresPage extends Component {
   state = {
@@ -28,14 +29,32 @@ class GenresPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.genres &&
-          this.props.genres.map((genre) => {
-            return <p key={genre.id}>Gênero: {genre.genre}</p>;
-          })}
-        <input onChange={this.handleInput} value={this.state.genre}></input>
-        <button onClick={this.createGenre}>Criar</button>
-      </div>
+      <Container>
+        <div className="background">
+          <img
+            src={"https://blush.ly/OMuSJorGu/p"}
+            alt="Pessoa tocando guitarra"
+          />
+        </div>
+        <div className="genreWrapper">
+          <div className="genres">
+            <ul>
+              {this.props.genres &&
+                this.props.genres.map((genre) => {
+                  return <li key={genre.id}>{genre.genre}</li>;
+                })}
+            </ul>
+
+            <div>
+              <input
+                onChange={this.handleInput}
+                value={this.state.genre}
+              ></input>
+              <button onClick={this.createGenre}>Criar</button>
+            </div>
+          </div>
+        </div>
+      </Container>
     );
   }
 }

@@ -16,6 +16,7 @@ const middlewares = [
     ? window.__REDUX_DEVTOOLS_EXTENSION__()
     : (f) => f,
 ];
+
 const store = createStore(generateReducers(history), compose(...middlewares));
 export const App = () => (
   <>

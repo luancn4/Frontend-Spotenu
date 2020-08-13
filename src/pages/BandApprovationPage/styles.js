@@ -69,7 +69,7 @@ export const Container = styled.div`
         ul {
           border-bottom: 1px solid black;
           :hover {
-            background-color: lightsalmon;
+            background-color: lightgoldenrodyellow;
           }
 
           li {
