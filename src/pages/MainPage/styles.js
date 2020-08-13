@@ -15,7 +15,7 @@ export const Container = styled.div`
   h1 {
     padding: 0.2em;
     font-size: 10em;
-    border: 12px outset #1C2F3E;
+    border: 12px outset #1c2f3e;
     border-radius: 37px;
   }
 
@@ -28,32 +28,48 @@ export const Container = styled.div`
   .buttons {
     display: flex;
     justify-content: space-evenly;
-    width: 500px;
+    width: 40em;
 
     button {
-      width: 200px;
-      box-shadow: 0px 10px 14px -7px #1C2F3E;
-      background: linear-gradient(to bottom, #BDC6E5 5%, #1C2F3E 100%);
-      background-color: #8f5c38;
-      border-radius: 8px;
-      display: inline-block;
-      cursor: pointer;
-      color: #ffffff;
-      font-family: Arial;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 13px 32px;
-      text-decoration: none;
-      text-shadow: 0px 1px 0px #3d768a;
-    }
-    button:hover {
-      background: linear-gradient(to bottom, #1C2F3E 5%, #76A5D7 100%);
-      background-color: #a89b8c;
-      transform: scale(1.1);
-    }
-    button:active {
+      width: 250px;
+      z-index: 1;
       position: relative;
-      top: 1px;
+      font-size: inherit;
+      font-family: inherit;
+      color: white;
+      padding: 0.5em 1em;
+      outline: none;
+      border: none;
+      background-color: hsl(236, 32%, 26%);
     }
+
+    button::before {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fc2f70;
+      transform-origin: center right;
+      transform: scaleX(0);
+      transition: transform 0.25s ease-in-out;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+
+    button:hover::before {
+      transform-origin: center left;
+      transform: scaleX(1);
+    }
+
+    .secondButton:hover::before {
+      transform-origin: center right;
+      transform: scaleX(1);
+    }
+    
   }
 `;

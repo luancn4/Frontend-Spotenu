@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { MainWrapper, LoginWrapper, ButtonStyled } from "./style";
+import { Container } from "./style";
 import { login } from "../../actions/users";
 import { routes } from "../../router/";
 import { push } from "connected-react-router";
@@ -24,12 +24,6 @@ class LoginPage extends Component {
     login: {},
   };
 
-  componentDidMount() {
-    // const token = localStorage.getItem("token");
-    // if (token !== null) {
-    // }
-  }
-
   handleInputLogin = (e) => {
     const { name, value } = e.target;
 
@@ -45,13 +39,15 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <>
-        <MainWrapper>
-          <LoginWrapper onSubmit={this.handleSubmit}>
+      <Container>
+        <div className="formWrapper">
+          <form onSubmit={this.handleSubmit}>
+            <h1>Entre já e comece a curtir!</h1>
             {loginForm.map((input) => {
               return (
                 <div key={input.name}>
                   <TextField
+                    className="inputs"
                     label={input.label}
                     required
                     name={input.name}
@@ -62,19 +58,28 @@ class LoginPage extends Component {
                 </div>
               );
             })}
-            <Button color="secondary" variant="contained" type="submit">
+
+            <Button
+              className="button"
+              color="secondary"
+              variant="contained"
+              type="submit"
+            >
               Entrar
             </Button>
-            <ButtonStyled
-              color="primary"
-              variant="contained"
-              onClick={() => this.props.signup()}
-            >
-              Cadastrar
-            </ButtonStyled>
-          </LoginWrapper>
-        </MainWrapper>
-      </>
+            <p>
+              Não possui uma conta?{" "}
+              <span onClick={() => this.props.signup()}>Cadastre-se!</span>
+            </p>
+          </form>
+        </div>
+        <div className="background">
+          <img
+            src={"https://blush.ly/q3CIMxQvR/p"}
+            alt="Duas pessoas sentadas no sofá"
+          />
+        </div>
+      </Container>
     );
   }
 }

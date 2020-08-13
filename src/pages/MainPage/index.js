@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Container } from "./styles";
 import {routes} from "../../router"
 import { push } from "connected-react-router";
+import Button from "@material-ui/core/Button";
+
 
 class MainPage extends Component {
   render() {
@@ -15,8 +17,8 @@ class MainPage extends Component {
 
         <br></br>
         <div className="buttons">
-          <button onClick = {() => this.props.goToLogin()}>Entrar</button>
-          <button onClick = {() => this.props.goToSignup()}>Cadastrar</button>
+          <Button onClick = {() => this.props.goToLogin()}>Entrar</Button>
+          <Button className= "secondButton" onClick = {() => this.props.goToSignup()}>Cadastrar</Button>
         </div>
       </Container>
     );

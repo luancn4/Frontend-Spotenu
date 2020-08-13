@@ -7,43 +7,8 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import {
-  MainWrapperLogin,
-  LoginWrapper,
-  ButtonStyled,
-  Container,
-} from "./style";
-import styled from "styled-components";
-
-const signupForm = [
-  {
-    name: "name",
-    type: "text",
-    label: "Qual o seu nome?",
-    pattern: "[A-Za-zçÇ0-9 .]{5,}",
-    title: "Mínimo 5 caracteres",
-  },
-  {
-    name: "nickname",
-    type: "text",
-    label: "Qual o seu apelido?",
-    pattern: "[A-Za-zçÇ0-9]{5,}",
-    title: "Mínimo 5 caracteres",
-  },
-  {
-    name: "email",
-    type: "email",
-    label: "Coloque seu email ",
-    title: "Digite um email válido",
-  },
-  {
-    name: "password",
-    type: "password",
-    label: "Coloque sua senha ",
-    pattern: "[A-Za-zçÇ0-9]{6,}",
-    title: "Mínimo 6 caracteres",
-  },
-];
+import { Container } from "./style";
+import signupForm from "./form";
 
 class Signup extends Component {
   state = {
@@ -99,17 +64,20 @@ class Signup extends Component {
   render() {
     return (
       <Container>
-        <div className = "background">
-          <img src = {"https://blush.ly/CISPScGbv/p"} />
+        <div className="background">
+          <img
+            src={"https://blush.ly/CISPScGbv/p"}
+            alt="Duas pessoas sentadas no sofá"
+          />
         </div>
-        <div className = "formWrapper">
+        <div className="formWrapper">
           <form onSubmit={this.handleSubmit}>
             <h1>Inscreva-se já e comece a curtir.</h1>
             {signupForm.map((input) => {
               return (
                 <div key={input.name}>
                   <TextField
-                  className= "inputs"
+                    className="inputs"
                     variant="outlined"
                     label={input.label}
                     required
@@ -146,7 +114,12 @@ class Signup extends Component {
               )}
             </Select>
 
-            <Button className = "button" color="primary" variant="contained" type="submit">
+            <Button
+              className="button"
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
               Cadastrar
             </Button>
           </form>

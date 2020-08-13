@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-const bg = "https://blush.ly/CISPScGbv/p";
-
 export const Container = styled.div`
 padding: 0 4em;
   display: flex;

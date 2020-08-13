@@ -22,7 +22,7 @@ class GenresPage extends Component {
     this.setState({
       genre: "",
     });
-    
+
     this.props.allGenres();
   };
 
