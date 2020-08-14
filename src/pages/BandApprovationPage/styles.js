@@ -10,8 +10,9 @@ export const Container = styled.div`
   color: #1c2f3e;
 
   header {
+    padding: 0 6em 0 10em;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 100%;

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getGenres, createGenre } from "../../actions/bands";
 import { Container } from "./styles";
+import { GiMusicalScore } from "react-icons/gi";
+
 
 class GenresPage extends Component {
   state = {
@@ -30,6 +32,15 @@ class GenresPage extends Component {
   render() {
     return (
       <Container>
+        <header>
+          <div>
+            <GiMusicalScore />
+            <strong>SPOTENU</strong>
+          </div>
+          <div>
+            <strong className="logout">LOGOUT</strong>
+          </div>
+        </header>
         <div className="background">
           <img
             src={"https://blush.ly/OMuSJorGu/p"}
@@ -37,6 +48,7 @@ class GenresPage extends Component {
           />
         </div>
         <div className="genreWrapper">
+          <h1>Lista de gêneros musicais</h1>
           <div className="genres">
             <ul>
               {this.props.genres &&
@@ -46,10 +58,16 @@ class GenresPage extends Component {
             </ul>
 
             <div>
-              <input
-                onChange={this.handleInput}
-                value={this.state.genre}
-              ></input>
+              <div className = "divizona">
+                <input
+                  onChange={this.handleInput}
+                  value={this.state.genre}
+                ></input>
+                <span className="bottom"></span>
+                <span className="right"></span>
+                <span className="top"></span>
+                <span className="left"></span>
+              </div>
               <button onClick={this.createGenre}>Criar</button>
             </div>
           </div>
