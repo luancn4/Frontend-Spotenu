@@ -5,6 +5,7 @@ import { Container } from "./styles";
 import bg from "./backgroundteste.png";
 import { GiMusicalScore } from "react-icons/gi";
 
+
 class ApprovationPage extends Component {
   componentDidMount = () => {
     this.props.renderAllBands();
@@ -31,11 +32,11 @@ class ApprovationPage extends Component {
           <div className="right">
             <h1>Lista de bandas</h1>
             <div className="bands">
-              {this.props.bands &&
-                this.props.bands.map((band) => {
-                  return (
-                    <ul key={band.id}>
-                      <li>
+              <ul>
+                {this.props.bands &&
+                  this.props.bands.map((band) => {
+                    return (
+                      <li key = {band.id}>
                         {band.name}{" "}
                         {!band.approved && (
                           <button onClick={() => this.approveBand(band.id)}>
@@ -43,9 +44,9 @@ class ApprovationPage extends Component {
                           </button>
                         )}
                       </li>
-                    </ul>
-                  );
-                })}
+                    );
+                  })}
+              </ul>
             </div>
           </div>
         </div>

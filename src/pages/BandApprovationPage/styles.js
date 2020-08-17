@@ -10,7 +10,7 @@ export const Container = styled.div`
   color: #1c2f3e;
 
   header {
-    padding: 0 6em 0 10em;
+    padding: 0 10em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,28 +63,30 @@ export const Container = styled.div`
         background-color: #e6e6e6;
         width: 100%;
         min-height: 50vh;
+        max-height: 51vh;
+        overflow-y: scroll;
         padding: 1em;
         border-radius: 1.5em;
         font-weight: 500;
 
         ul {
-          border-bottom: 1px solid black;
-          :hover {
-            background-color: lightgoldenrodyellow;
-          }
-
           li {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 2em;
+            margin-top: 0.5em;
+            border-bottom: 1px solid black;
+            :hover {
+              background-color: lightgoldenrodyellow;
+            }
 
             div {
               display: flex;
               align-items: center;
             }
             button {
-              margin-right: .3em;
+              margin-right: 0.3em;
               z-index: 1;
               position: relative;
               color: white;
