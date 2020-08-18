@@ -3,12 +3,19 @@ import { connect } from "react-redux";
 import { getAllBands, approveBand } from "../../actions/bands";
 import { Container } from "./styles";
 import bg from "./backgroundteste.png";
-import { GiMusicalScore } from "react-icons/gi";
-
+import { routes } from "../../router";
+import { replace } from "connected-react-router";
+import Header from "../../components/Header";
 
 class ApprovationPage extends Component {
   componentDidMount = () => {
-    this.props.renderAllBands();
+    const token = localStorage.getItem("token");
+
+    if (!token || this.props.user.type !== "admin") {
+      this.props.goToLogin();
+    } else {
+      this.props.renderAllBands();
+    }
   };
 
   approveBand = (id) => {
@@ -18,15 +25,7 @@ class ApprovationPage extends Component {
   render() {
     return (
       <Container>
-        <header>
-          <div>
-            <GiMusicalScore />
-            <strong>SPOTENU</strong>
-          </div>
-          <div>
-            <strong className="logout">LOGOUT</strong>
-          </div>
-        </header>
+        <Header />
         <div className="flex">
           <img className="left" src={bg} />
           <div className="right">
@@ -36,7 +35,7 @@ class ApprovationPage extends Component {
                 {this.props.bands &&
                   this.props.bands.map((band) => {
                     return (
-                      <li key = {band.id}>
+                      <li key={band.id}>
                         {band.name}{" "}
                         {!band.approved && (
                           <button onClick={() => this.approveBand(band.id)}>
@@ -57,11 +56,13 @@ class ApprovationPage extends Component {
 
 const mapStateToProps = (state) => ({
   bands: state.bands.bands,
+  user: state.bands.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   renderAllBands: () => dispatch(getAllBands()),
   approveBand: (id) => dispatch(approveBand(id)),
+  goToLogin: () => dispatch(replace(routes.login)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApprovationPage);

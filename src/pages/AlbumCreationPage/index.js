@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getGenres } from "../../actions/bands";
 import { Container } from "./styles";
+import { createAlbum } from "../../actions/bands";
+import { routes } from "../../router";
+import { replace } from "connected-react-router";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Chip from "@material-ui/core/Chip";
 import styled from "styled-components";
-import { createAlbum } from "../../actions/bands";
-import { GiMusicalScore } from "react-icons/gi";
+import Header from "../../components/Header";
 
 const CustomChip = styled(Chip)`
   width: 150px;
@@ -23,7 +25,16 @@ class AlbumCreationPage extends Component {
   };
 
   componentDidMount = () => {
-    this.props.allGenres();
+    const token = localStorage.getItem("token");
+    if (
+      !token ||
+      this.props.user.type !== "band" ||
+      !this.props.user.approved
+    ) {
+      this.props.goToLogin();
+    } else {
+      this.props.allGenres();
+    }
   };
 
   handleInput = (e) => {
@@ -48,24 +59,14 @@ class AlbumCreationPage extends Component {
   render() {
     return (
       <Container>
-        <header>
-          <div>
-            <GiMusicalScore />
-            <strong>SPOTENU</strong>
-          </div>
-          <ul>
-            <li>
-              <strong className="logout">LOGOUT</strong>
-            </li>
-          </ul>
-        </header>
+        <Header />
         <div className="wrapper">
           <div className="albums"></div>
           <div className="creation">
             <h1>Crie seu album</h1>
             <section>
               Nome do album:
-              <div className="divizona">
+              <div className="styledInput">
                 <input
                   value={this.state.album.name}
                   onChange={this.handleInput}
@@ -112,11 +113,13 @@ class AlbumCreationPage extends Component {
 
 const mapStateToProps = (state) => ({
   genres: state.bands.genres,
+  user: state.bands.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   allGenres: () => dispatch(getGenres()),
   create: (album) => dispatch(createAlbum(album)),
+  goToLogin: () => dispatch(replace(routes.login)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumCreationPage);

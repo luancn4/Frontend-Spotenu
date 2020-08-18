@@ -24,6 +24,13 @@ class LoginPage extends Component {
     login: {},
   };
 
+  componentDidMount = () => {
+    const token = localStorage.getItem("token")
+    if(token && this.props.user) {
+      
+    }
+  }
+
   handleInputLogin = (e) => {
     const { name, value } = e.target;
 
@@ -84,9 +91,13 @@ class LoginPage extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  user: state.bands.user
+})
+
 const mapDispatchToProps = (dispatch) => ({
   login: (body) => dispatch(login(body)),
   signup: () => dispatch(push(routes.signup)),
 });
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

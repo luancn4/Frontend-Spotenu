@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getGenres, createGenre } from "../../actions/bands";
 import { Container } from "./styles";
-import { GiMusicalScore } from "react-icons/gi";
-
+import { routes } from "../../router";
+import { replace } from "connected-react-router";
+import Header from "../../components/Header";
 
 class GenresPage extends Component {
   state = {
     genre: "",
   };
   componentDidMount = () => {
+    const token = localStorage.getItem("token");
+    if (!token || this.props.user.type !== "admin") {
+      this.props.goToLogin();
+    }
     this.props.allGenres();
   };
 
@@ -32,15 +37,7 @@ class GenresPage extends Component {
   render() {
     return (
       <Container>
-        <header>
-          <div>
-            <GiMusicalScore />
-            <strong>SPOTENU</strong>
-          </div>
-          <div>
-            <strong className="logout">LOGOUT</strong>
-          </div>
-        </header>
+        <Header />
         <div className="background">
           <img
             src={"https://blush.ly/OMuSJorGu/p"}
@@ -58,7 +55,7 @@ class GenresPage extends Component {
             </ul>
 
             <div>
-              <div className = "divizona">
+              <div className="divizona">
                 <input
                   onChange={this.handleInput}
                   value={this.state.genre}
@@ -79,11 +76,14 @@ class GenresPage extends Component {
 
 const mapStateToProps = (state) => ({
   genres: state.bands.genres,
+  user: state.bands.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   allGenres: () => dispatch(getGenres()),
   createGenre: (genre) => dispatch(createGenre(genre)),
+  goToLogin: () => dispatch(replace(routes.login)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenresPage);

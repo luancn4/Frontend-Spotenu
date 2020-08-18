@@ -9,39 +9,6 @@ export const Container = styled.div`
   background-color: white;
   color: #1c2f3e;
 
-  header {
-    padding: 0 10em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    height: 10vh;
-    text-align: center;
-    top: 0;
-
-    > div {
-      display: flex;
-      align-items: center;
-    }
-    svg {
-      height: 30px;
-      width: 33px;
-    }
-
-    strong {
-      padding: 1em;
-      font-size: 25px;
-    }
-
-    .logout {
-      :hover {
-        background-color: lightgoldenrodyellow;
-        cursor: pointer;
-      }
-    }
-  }
-
   .flex {
     display: flex;
     padding: 0 1em;
