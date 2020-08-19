@@ -6,37 +6,9 @@ import { userSignup, bandSignup, adminSignup } from "../../actions/users";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { MainWrapperLogin, LoginWrapper, ButtonStyled } from "./style";
-
-const signupForm = [
-  {
-    name: "name",
-    type: "text",
-    label: "Nome de usuário",
-    pattern: "[A-Za-zçÇ0-9 .]{5,}",
-    title: "Mínimo 5 caracteres",
-  },
-  {
-    name: "nickname",
-    type: "text",
-    label: "Nickname de usuário",
-    pattern: "[A-Za-zçÇ0-9]{5,}",
-    title: "Mínimo 5 caracteres",
-  },
-  {
-    name: "email",
-    type: "email",
-    label: "Email ",
-    title: "Digite um email válido",
-  },
-  {
-    name: "password",
-    type: "password",
-    label: "Senha ",
-    pattern: "[A-Za-zçÇ0-9]{6,}",
-    title: "Mínimo 6 caracteres",
-  },
-];
+import Button from "@material-ui/core/Button";
+import { Container } from "./style";
+import signupForm from "./form";
 
 class Signup extends Component {
   state = {
@@ -47,13 +19,6 @@ class Signup extends Component {
     isAdmin: false,
     isBand: false,
   };
-
-  componentDidMount() {
-    // const token = localStorage.getItem("token");
-    // if (token !== null) {
-    //   this.props.goToPosts();
-    // }
-  }
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -98,13 +63,22 @@ class Signup extends Component {
 
   render() {
     return (
-      <>
-        <MainWrapperLogin>
-          <LoginWrapper onSubmit={this.handleSubmit}>
+      <Container>
+        <div className="background">
+          <img
+            src={"https://blush.ly/CISPScGbv/p"}
+            alt="Duas pessoas sentadas no sofá"
+          />
+        </div>
+        <div className="formWrapper">
+          <form onSubmit={this.handleSubmit}>
+            <h1>Inscreva-se já e comece a curtir.</h1>
             {signupForm.map((input) => {
               return (
                 <div key={input.name}>
                   <TextField
+                    className="inputs"
+                    variant="outlined"
                     label={input.label}
                     required
                     name={input.name}
@@ -122,6 +96,7 @@ class Signup extends Component {
 
             {this.state.isBand && (
               <TextField
+                variant="outlined"
                 label={"Descrição"}
                 required
                 name={"description"}
@@ -139,12 +114,17 @@ class Signup extends Component {
               )}
             </Select>
 
-            <ButtonStyled color="primary" variant="contained" type="submit">
+            <Button
+              className="button"
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
               Cadastrar
-            </ButtonStyled>
-          </LoginWrapper>
-        </MainWrapperLogin>
-      </>
+            </Button>
+          </form>
+        </div>
+      </Container>
     );
   }
 }

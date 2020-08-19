@@ -31,14 +31,12 @@ export const setBandAlbums = (album) => {
 
 export const getAllBands = () => async (dispatch) => {
   const token = localStorage.getItem("token");
-  const body = {};
   try {
-    const response = await axios.get(`${baseUrl}/all`, body, {
+    const response = await axios.get(`${baseUrl}/all`, {
       headers: {
         authorization: token,
       },
     });
-
     dispatch(setAllBands(response.data));
   } catch (err) {
     console.error(err);
