@@ -11,6 +11,7 @@ import Select from "@material-ui/core/Select";
 import Chip from "@material-ui/core/Chip";
 import styled from "styled-components";
 import Header from "../../components/Header";
+import { getUserInfo } from "../../actions/users";
 
 const CustomChip = styled(Chip)`
   width: 150px;
@@ -26,15 +27,29 @@ class AlbumCreationPage extends Component {
 
   componentDidMount = () => {
     const token = localStorage.getItem("token");
-    if (
-      !token ||
-      this.props.user.type !== "band" ||
-      !this.props.user.approved
-    ) {
+    if (!token && !this.props.user) {
       this.props.goToLogin();
-    } else {
-      this.props.allGenres();
     }
+
+    if (token && !this.props.user) {
+      this.props.getInfo();
+    }
+
+    if (token && this.props.user) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          }
+          break;
+        default:
+          return false;
+      }
+    }
+    this.props.allGenres();
   };
 
   handleInput = (e) => {
@@ -117,9 +132,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getInfo: () => dispatch(getUserInfo()),
   allGenres: () => dispatch(getGenres()),
   create: (album) => dispatch(createAlbum(album)),
   goToLogin: () => dispatch(replace(routes.login)),
+  goToSearch: () => dispatch(replace(routes.search)),
+  goToNotApproved: () => dispatch(replace(routes.notApproved)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumCreationPage);

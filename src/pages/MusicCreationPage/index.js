@@ -16,11 +16,7 @@ class MusicCreation extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token");
 
-    if (!token || this.props.user.type !== "band" || !this.props.user.approved) {
-      this.props.goToLogin();
-    } else {
-      this.props.getAlbums();
-    }
+    this.props.getAlbums();
   };
 
   handleInputName = (e) => {
@@ -87,13 +83,14 @@ class MusicCreation extends Component {
 
 const mapStateToProps = (state) => ({
   albums: state.bands.albums,
-  user: state.bands.user
+  user: state.bands.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getAlbums: () => dispatch(getAlbumsByBand()),
   createMusic: (body) => dispatch(createMusic(body)),
   goToLogin: () => dispatch(replace(routes.login)),
+  goToNotApproved: () => dispatch(replace(routes.notApproved)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicCreation);

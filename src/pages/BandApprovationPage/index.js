@@ -11,11 +11,7 @@ class ApprovationPage extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token");
 
-    if (!token || this.props.user.type !== "admin") {
-      this.props.goToLogin();
-    } else {
-      this.props.renderAllBands();
-    }
+    this.props.renderAllBands();
   };
 
   approveBand = (id) => {

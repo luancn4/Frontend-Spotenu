@@ -12,9 +12,7 @@ class GenresPage extends Component {
   };
   componentDidMount = () => {
     const token = localStorage.getItem("token");
-    if (!token || this.props.user.type !== "admin") {
-      this.props.goToLogin();
-    }
+
     this.props.allGenres();
   };
 
@@ -83,7 +81,6 @@ const mapDispatchToProps = (dispatch) => ({
   allGenres: () => dispatch(getGenres()),
   createGenre: (genre) => dispatch(createGenre(genre)),
   goToLogin: () => dispatch(replace(routes.login)),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenresPage);

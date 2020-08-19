@@ -1,6 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import { GiMusicalScore } from "react-icons/gi";
+import { routes } from "../../router";
+import { replace, push } from "connected-react-router";
+import { getUserInfo } from "../../actions/users";
 
 const Container = styled.div`
   display: flex;
@@ -42,29 +46,50 @@ const Container = styled.div`
   }
 `;
 
-function Header() {
-  return (
-    <Container>
-      <div>
-        <GiMusicalScore />
-        <strong>SPOTENU</strong>
-      </div>
-      <ul>
-        <li>
-          <strong className="logout">BANDAS</strong>
-        </li>
-        <li>
-          <strong className="logout">MÚSICAS</strong>
-        </li>
-        <li>
-          <strong className="logout">GÊNEROS</strong>
-        </li>
-        <li>
-          <strong className="logout">LOGOUT</strong>
-        </li>
-      </ul>
-    </Container>
-  );
+class Header extends Component {
+  render() {
+    return (
+      <Container>
+        <div>
+          <GiMusicalScore />
+          <strong>SPOTENU</strong>
+        </div>
+        <ul>
+          <li onClick={() => this.props.goToSearch}>
+            <strong className="logout">INÍCIO</strong>
+          </li>
+          <li>
+            <strong className="logout">BANDAS</strong>
+          </li>
+          <li>
+            <strong className="logout">ALBUNS</strong>
+          </li>
+          <li>
+            <strong className="logout">MÚSICAS</strong>
+          </li>
+          <li>
+            <strong className="logout">GÊNEROS</strong>
+          </li>
+          <li>
+            <strong className="logout">LOGOUT</strong>
+          </li>
+        </ul>
+      </Container>
+    );
+  }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+  user: state.bands.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  goToSearch: () => dispatch(push(routes.goToSearch)),
+  goToBands: () => dispatch(push(routes.approvation)),
+  goToAlbum: () => dispatch(push(routes.albumCreation)),
+  goToMusics: () => dispatch(push(routes.musicCreation)),
+  goToGenres: () => dispatch(push(routes.genres)),
+  getInfo: () => dispatch(getUserInfo()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

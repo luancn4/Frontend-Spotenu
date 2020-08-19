@@ -9,6 +9,8 @@ import GenresPage from "../pages/BandGenresPage";
 import AlbumCreationPage from "../pages/AlbumCreationPage";
 import MusicCreationPage from "../pages/MusicCreationPage";
 import MainPage from "../pages/MainPage";
+import NotApproved from "../pages/BandNotApprovedPage"
+import Search from "../pages/SearchPage"
 
 export const routes = {
   main: "/",
@@ -18,6 +20,8 @@ export const routes = {
   genres: "/genres",
   albumCreation: "/albums",
   musicCreation: "/musics",
+  notApproved: "/band",
+  search: "/search"
 };
 
 function Router(props) {
@@ -39,6 +43,8 @@ function Router(props) {
           path={routes.musicCreation}
           component={MusicCreationPage}
         />
+        <Route exact path={routes.notApproved} component={NotApproved} />
+        <Route exact path={routes.search} component={Search} />
       </Switch>
     </ConnectedRouter>
   );
