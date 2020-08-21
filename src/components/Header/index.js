@@ -38,7 +38,7 @@ const Container = styled.div`
     }
   }
 
-  .logout {
+  .menuItems {
     :hover {
       background-color: lightgoldenrodyellow;
       cursor: pointer;
@@ -47,6 +47,12 @@ const Container = styled.div`
 `;
 
 class Header extends Component {
+  logout = () => {
+    localStorage.removeItem("token");
+
+    this.props.goToLogin();
+  };
+
   render() {
     return (
       <Container>
@@ -55,23 +61,23 @@ class Header extends Component {
           <strong>SPOTENU</strong>
         </div>
         <ul>
-          <li onClick={() => this.props.goToSearch}>
-            <strong className="logout">INÍCIO</strong>
+          <li onClick={() => this.props.goToSearch()}>
+            <strong className="menuItems">INÍCIO</strong>
           </li>
-          <li>
-            <strong className="logout">BANDAS</strong>
+          <li onClick={() => this.props.goToBands()}>
+            <strong className="menuItems">BANDAS</strong>
           </li>
-          <li>
-            <strong className="logout">ALBUNS</strong>
+          <li onClick={() => this.props.goToAlbum()}>
+            <strong className="menuItems">ALBUNS</strong>
           </li>
-          <li>
-            <strong className="logout">MÚSICAS</strong>
+          <li onClick={() => this.props.goToMusics()}>
+            <strong className="menuItems">MÚSICAS</strong>
           </li>
-          <li>
-            <strong className="logout">GÊNEROS</strong>
+          <li onClick={() => this.props.goToGenres()}>
+            <strong className="menuItems">GÊNEROS</strong>
           </li>
-          <li>
-            <strong className="logout">LOGOUT</strong>
+          <li onClick={() => this.logout()}>
+            <strong className="menuItems">LOGOUT</strong>
           </li>
         </ul>
       </Container>
@@ -84,12 +90,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  goToSearch: () => dispatch(push(routes.goToSearch)),
+  getInfo: () => dispatch(getUserInfo()),
+  goToSearch: () => dispatch(push(routes.search)),
   goToBands: () => dispatch(push(routes.approvation)),
   goToAlbum: () => dispatch(push(routes.albumCreation)),
   goToMusics: () => dispatch(push(routes.musicCreation)),
   goToGenres: () => dispatch(push(routes.genres)),
-  getInfo: () => dispatch(getUserInfo()),
+  goToLogin: () => dispatch(replace(routes.login)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

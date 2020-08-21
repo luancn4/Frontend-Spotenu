@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Container } from "./style";
-import { login } from "../../actions/users";
+import { login, getUserInfo } from "../../actions/users";
 import { routes } from "../../router/";
-import { push } from "connected-react-router";
+import { push, replace } from "connected-react-router";
 
 const loginForm = [
   {
@@ -25,11 +25,66 @@ class LoginPage extends Component {
   };
 
   componentDidMount = () => {
-    const token = localStorage.getItem("token")
-    if(token && this.props.user) {
-      
+    const token = localStorage.getItem("token");
+
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
     }
-  }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          this.props.goToApprovation();
+          break;
+
+        default:
+          return false;
+      }
+    }
+  };
+
+  componentDidUpdate = () => {
+    const token = localStorage.getItem("token");
+
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          this.props.goToApprovation();
+          break;
+
+        default:
+          return false;
+      }
+    }
+  };
 
   handleInputLogin = (e) => {
     const { name, value } = e.target;
@@ -92,12 +147,15 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.bands.user
-})
+  user: state.bands.user,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   login: (body) => dispatch(login(body)),
   signup: () => dispatch(push(routes.signup)),
+  getInfo: () => dispatch(getUserInfo()),
+  goToSearch: () => dispatch(replace(routes.search)),
+  goToApprovation: () => dispatch(replace(routes.approvation)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

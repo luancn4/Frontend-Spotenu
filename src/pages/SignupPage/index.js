@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { replace } from "connected-react-router";
 import { routes } from "../../router";
-import { userSignup, bandSignup, adminSignup } from "../../actions/users";
+import {
+  userSignup,
+  bandSignup,
+  adminSignup,
+  getUserInfo,
+} from "../../actions/users";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -16,8 +21,67 @@ class Signup extends Component {
       description: "",
     },
     user: "normal",
-    isAdmin: false,
     isBand: false,
+  };
+
+  componentDidMount = () => {
+    const token = localStorage.getItem("token");
+
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          break;
+
+        default:
+          return true;
+      }
+    }
+  };
+
+  componentDidUpdate = () => {
+    const token = localStorage.getItem("token");
+
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          break;
+
+        default:
+          return true;
+      }
+    }
   };
 
   handleInputChange = (e) => {
@@ -109,7 +173,7 @@ class Signup extends Component {
             <Select value={this.state.user} onChange={this.handleUserOption}>
               <MenuItem value={"normal"}>Normal</MenuItem>
               <MenuItem value={"band"}>Banda</MenuItem>
-              {this.state.isAdmin && (
+              {this.props.user.type === "admin" && (
                 <MenuItem value={"admin"}>Administrador</MenuItem>
               )}
             </Select>
@@ -129,10 +193,17 @@ class Signup extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  user: state.bands.user,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   UserSignup: (body) => dispatch(userSignup(body)),
   BandSignup: (body) => dispatch(bandSignup(body)),
   AdminSignup: (body) => dispatch(adminSignup(body)),
+  getInfo: () => dispatch(getUserInfo()),
+  goToSearch: () => dispatch(replace(routes.search)),
+  goToApprovation: () => dispatch(replace(routes.approvation)),
 });
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

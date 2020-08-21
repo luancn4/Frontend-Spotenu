@@ -8,18 +8,65 @@ import { getUserInfo } from "../../actions/users";
 class BandNotApprovedPage extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token");
-    if (token && !this.props.user) {
-      this.props.getInfo();
-    }
-
-    if (!token && !this.props.user) {
+    if (!token) {
       this.props.goToLogin();
     }
 
-    if (token && this.props.user.approved) {
-      this.props.goToAlbum();
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToAlbum();
+          }
+          break;
+
+        case "admin":
+          break;
+
+        default:
+          return false;
+      }
     }
   };
+
+  componentDidUpdate = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      this.props.goToLogin();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (this.props.user.approved) {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          break;
+
+        default:
+          this.props.goToLogin();
+      }
+    }
+  };
+
   render() {
     return (
       <Container>
@@ -42,6 +89,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   goToAlbum: () => dispatch(replace(routes.albumCreation)),
   goToLogin: () => dispatch(replace(routes.login)),
+  goToSearch: () => dispatch(replace(routes.search)),
   getInfo: () => dispatch(getUserInfo()),
 });
 

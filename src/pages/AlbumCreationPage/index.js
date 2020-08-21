@@ -27,15 +27,15 @@ class AlbumCreationPage extends Component {
 
   componentDidMount = () => {
     const token = localStorage.getItem("token");
-    if (!token && !this.props.user) {
+    if (!token) {
       this.props.goToLogin();
     }
 
-    if (token && !this.props.user) {
+    if (token && this.props.user.length === 0) {
       this.props.getInfo();
     }
 
-    if (token && this.props.user) {
+    if (this.props.user && token) {
       switch (this.props.user.type) {
         case "normal":
           this.props.goToSearch();
@@ -46,10 +46,32 @@ class AlbumCreationPage extends Component {
           }
           break;
         default:
-          return false;
+          this.props.allGenres();
       }
     }
-    this.props.allGenres();
+  };
+
+  componentDidUpdate = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      this.props.goToLogin();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          }
+          break;
+        default:
+          this.props.allGenres();
+      }
+    }
   };
 
   handleInput = (e) => {

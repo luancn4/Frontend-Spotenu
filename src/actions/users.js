@@ -15,6 +15,15 @@ export const setUserInfo = (userInfo) => {
   };
 };
 
+export const setMusics = (musics) => {
+  return {
+    type: "SET_MUSICS",
+    payload: {
+      musics,
+    },
+  };
+};
+
 export const login = (body) => async (dispatch) => {
   try {
     const response = await axios.post(`${baseUrl}/login`, body);
@@ -74,13 +83,11 @@ export const bandSignup = (body) => async (dispatch) => {
 export const adminSignup = (body) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
-    const response = await axios.post(`${baseUrl}/signup/admin`, body, {
+    await axios.post(`${baseUrl}/signup/admin`, body, {
       headers: {
         authorization: token,
       },
     });
-
-    localStorage.setItem("token", response.data.accessToken);
   } catch (err) {
     console.error(err.message);
   }
@@ -97,6 +104,25 @@ export const getUserInfo = () => async (dispatch) => {
     });
 
     dispatch(setUserInfo(res.data.userInfo));
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+export const searchForMusic = (name) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  const body = {
+    name,
+  };
+
+  try {
+    const res = await axios.get(`${baseUrl}/search`, body, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    dispatch(setMusics(res.data.musics));
   } catch (err) {
     console.error(err.message);
   }
