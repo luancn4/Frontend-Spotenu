@@ -83,7 +83,7 @@ class ApprovationPage extends Component {
       <Container>
         <Header />
         <div className="flex">
-          <img className="left" src={bg} />
+          <img className="left" src={bg} alt = "Foto"/>
           <div className="right">
             <h1>Lista de bandas</h1>
             <div className="bands">

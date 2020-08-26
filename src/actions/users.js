@@ -4,7 +4,7 @@ import { routes } from "../router";
 
 // https://vitftlgchg.execute-api.us-east-1.amazonaws.com/dev/users
 
-const baseUrl = "http://localhost:3000/users";
+const baseUrl = "https://vitftlgchg.execute-api.us-east-1.amazonaws.com/dev/users";
 
 export const setUserInfo = (userInfo) => {
   return {
@@ -95,7 +95,6 @@ export const adminSignup = (body) => async (dispatch) => {
 
 export const getUserInfo = () => async (dispatch) => {
   const token = localStorage.getItem("token");
-
   try {
     const res = await axios.get(`${baseUrl}/info`, {
       headers: {
@@ -109,14 +108,10 @@ export const getUserInfo = () => async (dispatch) => {
   }
 };
 
-export const searchForMusic = (name) => async (dispatch) => {
+export const searchForMusic = (music) => async (dispatch) => {
   const token = localStorage.getItem("token");
-  const body = {
-    name,
-  };
-
   try {
-    const res = await axios.get(`${baseUrl}/search`, body, {
+    const res = await axios.get(`${baseUrl}/search?music=${music}`, {
       headers: {
         authorization: token,
       },
