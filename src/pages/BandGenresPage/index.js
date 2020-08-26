@@ -4,6 +4,7 @@ import { getGenres, createGenre } from "../../actions/bands";
 import { Container } from "./styles";
 import { routes } from "../../router";
 import { replace } from "connected-react-router";
+import { getUserInfo } from "../../actions/users";
 import Header from "../../components/Header";
 
 class GenresPage extends Component {
@@ -12,8 +13,67 @@ class GenresPage extends Component {
   };
   componentDidMount = () => {
     const token = localStorage.getItem("token");
+    if (!token) {
+      this.props.goToLogin();
+    }
 
-    this.props.allGenres();
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          this.props.allGenres();
+          break;
+
+        default:
+          return false
+      }
+    }
+  };
+
+  componentDidUpdate = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      this.props.goToLogin();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.goToSearch();
+          }
+          break;
+
+        case "admin":
+          this.props.allGenres();
+          break;
+
+        default:
+          this.props.goToLogin();
+      }
+    }
   };
 
   handleInput = (e) => {
@@ -78,9 +138,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getInfo: () => dispatch(getUserInfo()),
+  goToSearch: () => dispatch(replace(routes.search)),
+  goToNotApproved: () => dispatch(replace(routes.notApproved)),
+  goToLogin: () => dispatch(replace(routes.login)),
   allGenres: () => dispatch(getGenres()),
   createGenre: (genre) => dispatch(createGenre(genre)),
-  goToLogin: () => dispatch(replace(routes.login)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenresPage);

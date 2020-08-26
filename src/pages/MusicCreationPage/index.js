@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMusic, getAlbumsByBand } from "../../actions/bands";
+import { getUserInfo } from "../../actions/users";
 import { Container } from "./styles";
 import { routes } from "../../router";
 import { replace } from "connected-react-router";
@@ -15,8 +16,65 @@ class MusicCreation extends Component {
 
   componentDidMount = () => {
     const token = localStorage.getItem("token");
+    if (!token) {
+      this.props.goToLogin();
+    }
 
-    this.props.getAlbums();
+    if (token && this.props.user.length === 0) {
+      this.props.getInfo();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.getAlbums();
+          }
+          break;
+
+        case "admin":
+          return true;
+
+        default:
+          return false;
+      }
+    }
+  };
+
+  componentDidUpdate = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      this.props.goToLogin();
+    }
+
+    if (this.props.user && token) {
+      switch (this.props.user.type) {
+        case "normal":
+          this.props.goToSearch();
+          break;
+
+        case "band":
+          if (!this.props.user.approved) {
+            this.props.goToNotApproved();
+          } else {
+            this.props.getAlbums();
+          }
+          break;
+
+        case "admin":
+          return true;
+
+        default:
+          this.props.goToLogin();
+      }
+    }
   };
 
   handleInputName = (e) => {
@@ -87,10 +145,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getInfo: () => dispatch(getUserInfo()),
   getAlbums: () => dispatch(getAlbumsByBand()),
   createMusic: (body) => dispatch(createMusic(body)),
-  goToLogin: () => dispatch(replace(routes.login)),
+  goToSearch: () => dispatch(replace(routes.search)),
   goToNotApproved: () => dispatch(replace(routes.notApproved)),
+  goToLogin: () => dispatch(replace(routes.login)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicCreation);

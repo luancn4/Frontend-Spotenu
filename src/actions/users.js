@@ -4,13 +4,22 @@ import { routes } from "../router";
 
 // https://vitftlgchg.execute-api.us-east-1.amazonaws.com/dev/users
 
-const baseUrl = "http://localhost:3000/users";
+const baseUrl = "https://vitftlgchg.execute-api.us-east-1.amazonaws.com/dev/users";
 
 export const setUserInfo = (userInfo) => {
   return {
     type: "SET_USER_INFO",
     payload: {
       userInfo,
+    },
+  };
+};
+
+export const setMusics = (musics) => {
+  return {
+    type: "SET_MUSICS",
+    payload: {
+      musics,
     },
   };
 };
@@ -74,13 +83,11 @@ export const bandSignup = (body) => async (dispatch) => {
 export const adminSignup = (body) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
-    const response = await axios.post(`${baseUrl}/signup/admin`, body, {
+    await axios.post(`${baseUrl}/signup/admin`, body, {
       headers: {
         authorization: token,
       },
     });
-
-    localStorage.setItem("token", response.data.accessToken);
   } catch (err) {
     console.error(err.message);
   }
@@ -88,7 +95,6 @@ export const adminSignup = (body) => async (dispatch) => {
 
 export const getUserInfo = () => async (dispatch) => {
   const token = localStorage.getItem("token");
-
   try {
     const res = await axios.get(`${baseUrl}/info`, {
       headers: {
@@ -97,6 +103,21 @@ export const getUserInfo = () => async (dispatch) => {
     });
 
     dispatch(setUserInfo(res.data.userInfo));
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+export const searchForMusic = (music) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.get(`${baseUrl}/search?music=${music}`, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    dispatch(setMusics(res.data.musics));
   } catch (err) {
     console.error(err.message);
   }

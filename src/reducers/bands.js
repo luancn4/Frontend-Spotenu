@@ -3,6 +3,7 @@ const initialState = {
   genres: [],
   albums: [],
   user: [],
+  musics: []
 };
 
 const bands = (state = initialState, action) => {
@@ -21,6 +22,12 @@ const bands = (state = initialState, action) => {
 
     case "SET_USER_INFO": {
       return { ...state, user: action.payload.userInfo };
+    }
+
+    case "SET_MUSICS": {
+      return {
+        ...state, musics: action.payload.musics
+      }
     }
     
     default:
