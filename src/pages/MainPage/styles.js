@@ -72,4 +72,27 @@ export const Container = styled.div`
     }
     
   }
+
+  @media screen and (max-width: 1024px) {
+    padding: 3em 0;
+    text-align: center;
+    justify-content: space-evenly;
+
+    h1 {
+      padding: 0;
+      font-size: 5em;
+      border: none;
+    }
+
+    h3 {
+      font-size: 1.7em
+    }
+
+    .buttons {
+      height: 15vh;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
 `;
