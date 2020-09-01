@@ -17,7 +17,19 @@
 
 ## Telas :computer:
 
-<img src="https://static.vecteezy.com/system/resources/previews/001/218/694/non_2x/under-construction-warning-sign-vector.jpg">
+<img src="https://user-images.githubusercontent.com/42410437/91854942-de4bf680-ec3a-11ea-8e4a-5c6b7aad9ad0.png">
+
+<img src="https://user-images.githubusercontent.com/42410437/91855059-020f3c80-ec3b-11ea-8c70-67c803d8d0e6.png">
+
+<img src="https://user-images.githubusercontent.com/42410437/91855611-cc1e8800-ec3b-11ea-97ec-4d5b9ac320e4.png">
+
+<img src="https://user-images.githubusercontent.com/42410437/91855385-7cd85780-ec3b-11ea-8f04-2ee4862568b4.png">
+
+<img src="https://user-images.githubusercontent.com/42410437/91855434-9083be00-ec3b-11ea-8092-f2b52828576c.png">
+
+<img src="https://user-images.githubusercontent.com/42410437/91855507-a6917e80-ec3b-11ea-9090-c1c1fde69efa.png">
+
+<img src="https://user-images.githubusercontent.com/42410437/91855545-b5783100-ec3b-11ea-8f79-b0997fe837ac.png">
 
 ## Contato :e-mail:
 <ul>
