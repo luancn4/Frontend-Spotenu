@@ -103,7 +103,7 @@ class GenresPage extends Component {
           />
         </div>
         <div className="genreWrapper">
-          <h1>Lista de gêneros musicais</h1>
+          <h1>Gêneros musicais</h1>
           <div className="genres">
             <ul>
               {this.props.genres &&

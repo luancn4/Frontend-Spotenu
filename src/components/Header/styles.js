@@ -54,4 +54,10 @@ export const Container = styled.div`
   #generos {
     display:  ${(props) => (props.g ? "" : "none")};
   }
+
+  @media screen and (max-width: 1024px) {
+    div {
+      display: none;
+    }
+  }
 `;

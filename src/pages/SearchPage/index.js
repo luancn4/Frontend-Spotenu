@@ -68,7 +68,7 @@ class SearchPage extends Component {
         <Header />
         <div className="flex">
           <div className="center">
-            <input onChange={this.searchFor} value = {this.state.music}/>
+            <input onChange={this.searchFor} value = {this.state.music} placeholder = "Pesquisar..."/>
             <div className="bands">
               <ul>
                 {this.props.musics &&

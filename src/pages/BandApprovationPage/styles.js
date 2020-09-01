@@ -29,14 +29,16 @@ export const Container = styled.div`
         justify-content: space-evenly;
         background-color: #e6e6e6;
         width: 100%;
-        min-height: 50vh;
-        max-height: 51vh;
+        min-height:50vh;
+        max-height: 60vh;
         overflow-y: scroll;
         padding: 1em;
         border-radius: 1.5em;
         font-weight: 500;
+        margin-bottom: 1em;
 
         ul {
+          padding-top: 6em;
           li {
             display: flex;
             justify-content: space-between;
@@ -86,6 +88,29 @@ export const Container = styled.div`
               }
             }
           }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    background-color: whitesmoke;
+    .flex {
+      .left {
+        display: none;
+      }
+
+      .right {
+        h1 {
+          text-align: center;
+          margin-top: 0.5em;
+          margin-bottom: 0.2em;
+          font-size: 60px;
+        }
+
+        .bands {
+          height: 100%;
         }
       }
     }

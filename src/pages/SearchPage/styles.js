@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import bg from "./background.png";
 
 export const Container = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #f2f2f2;
+  background-color: whitesmoke;
   color: #1c2f3e;
 
   .flex {
@@ -19,18 +20,24 @@ export const Container = styled.div`
       align-items: center;
 
       input {
-        padding: .5em .1em;
+        padding: 0.5em 0.1em;
         width: 50vw;
         height: 6vh;
         font-size: 60px;
         margin-bottom: 0.1em;
-        border-radius: .3em;
+        border-radius: 0.3em;
+
+        ::placeholder {
+          font-size: 0.7em;
+          color: #312f3e;
+        }
       }
 
       .bands {
+        background-image: url(${bg});
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: start;
         background-color: #e6e6e6;
         width: 50vw;
         min-height: 60vh;
@@ -46,6 +53,7 @@ export const Container = styled.div`
             justify-content: space-between;
             align-items: center;
             font-size: 2em;
+            font-weight: bold;
             margin-top: 0.5em;
             border-bottom: 1px solid black;
             :hover {
@@ -56,40 +64,20 @@ export const Container = styled.div`
               display: flex;
               align-items: center;
             }
-            button {
-              margin-right: 0.3em;
-              z-index: 1;
-              position: relative;
-              color: white;
-              padding: 0.5em 1em;
-              outline: none;
-              border: none;
-              background-color: hsl(236, 32%, 26%);
-              :hover {
-                cursor: pointer;
-              }
-
-              ::before {
-                content: "";
-                z-index: -1;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                border: 4px solid hsl(236, 32%, 26%);
-                transform-origin: center;
-                transform: scale(1);
-              }
-
-              :hover::before {
-                transition: all 0.75s ease-in-out;
-                transform-origin: center;
-                transform: scale(1.75);
-                opacity: 0;
-              }
-            }
           }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    .flex {
+      .center {
+        input {
+          width: 90vw;
+        }
+        .bands {
+          width: 90vw;
+          height: 100%;
         }
       }
     }

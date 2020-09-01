@@ -28,7 +28,8 @@ export const Container = styled.div`
   .buttons {
     display: flex;
     justify-content: space-evenly;
-    width: 40em;
+    width: 100%;
+    padding: 0 20em;
 
     button {
       width: 250px;
@@ -71,5 +72,29 @@ export const Container = styled.div`
       transform: scaleX(1);
     }
     
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 3em 0;
+    text-align: center;
+    justify-content: space-evenly;
+
+    h1 {
+      padding: 0;
+      font-size: 5em;
+      border: none;
+    }
+
+    h3 {
+      font-size: 1.7em
+    }
+
+    .buttons {
+      padding: 0;
+      height: 15vh;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 `;

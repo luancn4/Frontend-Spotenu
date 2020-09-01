@@ -43,7 +43,7 @@ export const Container = styled.div`
 
         :hover {
           transform: scale(1.03);
-          background-color: #F3705A;
+          background-color: #f3705a;
         }
       }
 
@@ -52,10 +52,22 @@ export const Container = styled.div`
         text-align: center;
 
         span:hover {
-          color: #C51162;
+          color: #c51162;
           cursor: pointer;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 0 2em;
+    text-align: center;
+
+    .background {
+      display: none;
+    }
+    .formWrapper {
+      z-index: 1;
     }
   }
 `;

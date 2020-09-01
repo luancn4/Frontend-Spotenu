@@ -71,7 +71,7 @@ class BandNotApprovedPage extends Component {
     return (
       <Container>
         <div>
-          <h1>Parece que sua banda ainda não foi aprovada :(</h1>
+          <h1>Sua banda ainda não foi aprovada :(</h1>
           <h4>
             Nossos moderadores estão trabalhando nisso, tente novamente mais
             tarde!

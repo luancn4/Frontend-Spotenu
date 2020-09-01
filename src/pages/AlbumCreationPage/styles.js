@@ -172,4 +172,31 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1024px) {
+    background-image: none;
+    background-color: #f2f2f2;
+    .wrapper {
+      padding: 0;
+      justify-content: center;
+
+      .albums {
+        display: none;
+      }
+
+      .creation {
+        width: 100vw;
+
+        h1 {
+          width: 350px;
+          font-size: 40px;
+        }
+
+        section {
+          width: 90%;
+          height: 30%;
+        }
+      }
+    }
+  }
 `;

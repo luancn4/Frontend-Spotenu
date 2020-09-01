@@ -51,8 +51,8 @@ export const Container = styled.div`
           }
 
           ::placeholder {
-              color: #1C2F3E;
-              font-size: 1.2em;
+            color: #1c2f3e;
+            font-size: 1.2em;
           }
         }
 
@@ -119,7 +119,7 @@ export const Container = styled.div`
         }
 
         select {
-          background-color: #BDC6E5;
+          background-color: #bdc6e5;
           font-size: 1.1em;
           padding: 0.5em;
           padding-right: 2.5em;
@@ -176,6 +176,28 @@ export const Container = styled.div`
       justify-content: center;
       align-items: center;
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .wrapper {
+      .left {
+
+        h1 {
+          font-size: 25px;
+        }
+
+        section {
+          padding: 0 1em;
+          width: 100%;
+          height: 50vh;
+          justify-content: none;
+        }
+      }
+
+      .right {
+        display: none;
+      }
     }
   }
 `;
