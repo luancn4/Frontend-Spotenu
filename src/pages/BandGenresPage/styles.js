@@ -73,7 +73,7 @@ export const Container = styled.div`
 
       span {
         position: absolute;
-        background-color: #A9A9A9;
+        background-color: #a9a9a9;
         transition: transform 0.5s ease;
       }
 
@@ -139,11 +139,11 @@ export const Container = styled.div`
         position: relative;
         font-size: inherit;
         font-family: inherit;
-        color: #1C2F3E;
+        color: #1c2f3e;
         padding: 0.5em 1em;
         outline: none;
         border: none;
-        background-color:#A9A9A9;
+        background-color: #a9a9a9;
         overflow: hidden;
         transition: color 0.4s ease-in-out;
       }
@@ -157,7 +157,7 @@ export const Container = styled.div`
         width: 1em;
         height: 1em;
         border-radius: 50%;
-        background-color: #1C2F3E;
+        background-color: #1c2f3e;
         transform-origin: left;
         transform: translate3d(50%, 50%, 0) scale3d(0, 0, 0);
         transition: transform 1s ease-in-out;
@@ -170,6 +170,23 @@ export const Container = styled.div`
 
       button:hover::before {
         transform: translate3d(100%, 100%, 0) scale3d(90, 90, 90);
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .background {
+      display: none;
+    }
+
+    .genreWrapper {
+      h1 {
+        font-size: 40px;
+        margin-bottom: .8em;
+      }
+
+      .genres {
+        width: 80vw;
       }
     }
   }

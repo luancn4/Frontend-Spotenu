@@ -48,4 +48,19 @@ padding: 0 4em;
       }
     }
   }
+
+  @media screen and (max-width: 1024px) {
+    padding: 0 1.5em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .background {
+      display: none;
+    }
+
+    .formWrapper {
+      z-index: 1;
+    }
+  }
 `;

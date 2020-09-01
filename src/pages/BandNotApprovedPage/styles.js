@@ -14,4 +14,20 @@ export const Container = styled.div`
 
   background-image: url(${bg});
   background-size: 100%;
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    div {
+      text-align: center;
+
+      font-size: 19px;
+      h1 {
+        margin-bottom: 1em;
+      }
+    }
+  }
 `;

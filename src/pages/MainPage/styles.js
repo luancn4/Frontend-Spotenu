@@ -28,7 +28,8 @@ export const Container = styled.div`
   .buttons {
     display: flex;
     justify-content: space-evenly;
-    width: 40em;
+    width: 100%;
+    padding: 0 20em;
 
     button {
       width: 250px;
@@ -89,6 +90,7 @@ export const Container = styled.div`
     }
 
     .buttons {
+      padding: 0;
       height: 15vh;
       flex-direction: column;
       justify-content: space-between;
